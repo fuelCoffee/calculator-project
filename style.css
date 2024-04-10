@@ -16,3 +16,7 @@ button {
 .bottom-row {
   display: flex;
 }
+
+.stretch {
+  flex-grow: 3;
+}
