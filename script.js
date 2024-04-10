@@ -5,8 +5,7 @@ let display = document.querySelector(".display");
 let num1;
 let num2;
 let operator;
-let result;
-let buttonText = "";
+let displayValue = "";
 
 function add(num1, num2) {
   return (result = num1 + num2);
@@ -25,20 +24,72 @@ function divide(num1, num2) {
 }
 
 function operate(num1, operator, num2) {
-  if (operator == "+") {
-    display.innerHTML = add(num1, num2);
-  } else if (operator == "-") {
-    display.innerHTML = subtract(num1, num2);
-  } else if (operator == "*") {
-    display.innerHTML = multiply(num1, num2);
-  } else if (operator == "/") {
-    display.innerHTML = divide(num1, num2);
+  if (operator === "+") {
+    sum1 = add(parseInt(num1), parseInt(num2));
+    display.innerHTML = sum1;
+  } else if (operator === "-") {
+    sum1 = subtract(num1, num2);
+    display.innerHTML = sum1;
+  } else if (operator === "x") {
+    sum1 = multiply(num1, num2);
+    display.innerHTML = sum1;
+  } else if (operator === "/") {
+    sum1 = divide(num1, num2);
+    display.innerHTML = sum1;
   }
 }
 
 addEventListener("click", function (event) {
-  if (event.target.tagName === "BUTTON") {
-    buttonText += event.target.textContent;
-    display.textContent = buttonText;
+  //If an operand is selected. Run this logic
+  if (event.target.classList.contains("operand")) {
+    operandClicked(event);
+  } else if (event.target.classList.contains("equals")) {
+    equalsClicked();
+  } else if (event.target.classList.contains("clear")) {
+    clearClicked();
+  } else if (event.target.tagName === "BUTTON") {
+    buttonClicked(event);
   }
 });
+
+// = means operate() runs, only if num1 is present and displayValue is not null.
+// any amount of numbers are concat into num1 when an operand is selected.
+// when num2 is assigned a number, a calculation is run, whether it is with "=" or from an operand.
+// Each time an operand is selected, the displayValue gets placed into num1 or num2.
+// When num1 has a value, the "=" will work, otherwise it does nothing.
+
+function clearClicked() {
+  console.log("clear");
+  display.textContent = "0";
+  num1 = null;
+  num2 = null;
+  operator = null;
+  displayValue = "";
+}
+
+function equalsClicked() {
+  num2 = displayValue;
+  if (num1 && operator && num2) {
+    operate(num1, operator, num2);
+  }
+}
+
+function operandClicked(event) {
+  operator = event.target.textContent;
+  console.log(operator);
+  if (displayValue) {
+    if (!num1) {
+      num1 = displayValue;
+      displayValue = "";
+    } else {
+      displayValue = event.target.textContent;
+      num2 = displayValue;
+      operate(num1, operator, num2);
+    }
+  }
+}
+
+function buttonClicked(event) {
+  displayValue += event.target.textContent;
+  display.textContent = displayValue;
+}
