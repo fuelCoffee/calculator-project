@@ -27,15 +27,19 @@ function operate(number1, operator, number2) {
   if (operator === "+") {
     num1 = add(parseInt(number1), parseInt(number2));
     display.innerHTML = num1;
+    resetNumber();
   } else if (operator === "-") {
     num1 = subtract(number1, number2);
     display.innerHTML = num1;
+    resetNumber();
   } else if (operator === "x") {
     num1 = multiply(number1, number2);
     display.innerHTML = num1;
+    resetNumber();
   } else if (operator === "/") {
     num1 = divide(number1, number2);
     display.innerHTML = num1;
+    resetNumber();
   }
 }
 
@@ -77,8 +81,10 @@ function equalsClicked() {
 function operandClicked(event) {
   operator = event.target.textContent;
   console.log(operator);
+  console.log("num1: " + num1);
   if (num1) {
     num2 = displayValue;
+    console.log("num2: " + num2);
     operate(num1, operator, num2);
   } else {
     num1 = displayValue;
@@ -89,4 +95,9 @@ function operandClicked(event) {
 function buttonClicked(event) {
   displayValue += event.target.textContent;
   display.textContent = displayValue;
+}
+
+function resetNumber() {
+  num2 = "";
+  displayValue = "";
 }
