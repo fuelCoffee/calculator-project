@@ -8,7 +8,7 @@ let operator;
 let displayValue = "";
 
 function add(num1, num2) {
-  return (result = num1 + num2);
+  return num1 + num2;
 }
 
 function subtract(num1, num2) {
@@ -23,19 +23,19 @@ function divide(num1, num2) {
   return (result = num1 / num2);
 }
 
-function operate(num1, operator, num2) {
+function operate(number1, operator, number2) {
   if (operator === "+") {
-    sum1 = add(parseInt(num1), parseInt(num2));
-    display.innerHTML = sum1;
+    num1 = add(parseInt(number1), parseInt(number2));
+    display.innerHTML = num1;
   } else if (operator === "-") {
-    sum1 = subtract(num1, num2);
-    display.innerHTML = sum1;
+    num1 = subtract(number1, number2);
+    display.innerHTML = num1;
   } else if (operator === "x") {
-    sum1 = multiply(num1, num2);
-    display.innerHTML = sum1;
+    num1 = multiply(number1, number2);
+    display.innerHTML = num1;
   } else if (operator === "/") {
-    sum1 = divide(num1, num2);
-    display.innerHTML = sum1;
+    num1 = divide(number1, number2);
+    display.innerHTML = num1;
   }
 }
 
@@ -77,15 +77,12 @@ function equalsClicked() {
 function operandClicked(event) {
   operator = event.target.textContent;
   console.log(operator);
-  if (displayValue) {
-    if (!num1) {
-      num1 = displayValue;
-      displayValue = "";
-    } else {
-      displayValue = event.target.textContent;
-      num2 = displayValue;
-      operate(num1, operator, num2);
-    }
+  if (num1) {
+    num2 = displayValue;
+    operate(num1, operator, num2);
+  } else {
+    num1 = displayValue;
+    displayValue = "";
   }
 }
 
