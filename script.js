@@ -6,6 +6,7 @@ let num1;
 let num2;
 let operator;
 let result;
+let buttonText = "";
 
 function add(num1, num2) {
   return (result = num1 + num2);
@@ -34,3 +35,10 @@ function operate(num1, operator, num2) {
     display.innerHTML = divide(num1, num2);
   }
 }
+
+addEventListener("click", function (event) {
+  if (event.target.tagName === "BUTTON") {
+    buttonText += event.target.textContent;
+    display.textContent = buttonText;
+  }
+});
