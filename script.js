@@ -26,19 +26,19 @@ function divide(num1, num2) {
 function operate(number1, operator, number2) {
   if (operator === "+") {
     num1 = add(parseInt(number1), parseInt(number2));
-    display.innerHTML = num1;
+    display.textContent = num1;
     resetNumber();
   } else if (operator === "-") {
     num1 = subtract(number1, number2);
-    display.innerHTML = num1;
+    display.textContent = num1;
     resetNumber();
   } else if (operator === "x") {
     num1 = multiply(number1, number2);
-    display.innerHTML = num1;
+    display.textContent = num1;
     resetNumber();
   } else if (operator === "/") {
     num1 = divide(number1, number2);
-    display.innerHTML = num1;
+    display.textContent = num1;
     resetNumber();
   }
 }
@@ -51,7 +51,7 @@ addEventListener("click", function (event) {
     equalsClicked();
   } else if (event.target.classList.contains("clear")) {
     clearClicked();
-  } else if (event.target.tagName === "BUTTON") {
+  } else if (event.target.classList.contains("number")) {
     buttonClicked(event);
   }
 });
@@ -82,11 +82,11 @@ function operandClicked(event) {
   operator = event.target.textContent;
   console.log(operator);
   console.log("num1: " + num1);
-  if (num1) {
+  if (num1 && displayValue) {
     num2 = displayValue;
     console.log("num2: " + num2);
     operate(num1, operator, num2);
-  } else {
+  } else if (displayValue != "") {
     num1 = displayValue;
     displayValue = "";
   }
