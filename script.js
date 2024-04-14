@@ -79,16 +79,19 @@ function equalsClicked() {
 }
 
 function operandClicked(event) {
-  operator = event.target.textContent;
   console.log(operator);
   console.log("num1: " + num1);
   if (num1 && displayValue) {
     num2 = displayValue;
     console.log("num2: " + num2);
     operate(num1, operator, num2);
+    operator = event.target.textContent;
   } else if (displayValue != "") {
     num1 = displayValue;
     displayValue = "";
+    operator = event.target.textContent;
+  } else {
+    operator = event.target.textContent;
   }
 }
 
